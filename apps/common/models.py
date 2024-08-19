@@ -36,10 +36,12 @@ class Award(BaseModel):
 
 
 class Category(BaseModel):
+
     STATUS = (
         (0, "Movie"),
         (1, "News"),
     )
+
     name = models.CharField(max_length=225, null=True, blank=True)
     status = models.IntegerField(choices=STATUS, default=0, null=True, blank=True)
 

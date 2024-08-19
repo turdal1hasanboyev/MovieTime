@@ -7,11 +7,13 @@ from apps.common.models import BaseModel
 
 
 class Movie(BaseModel):
+
     LANGUAGE = (
         (0, "Uzbek"),
         (1, "Russian"),
         (2, "English"),
     )
+
     name = models.CharField(max_length=225, null=True, blank=True)
     slug = models.SlugField(unique=True, max_length=225, db_index=True, null=True, blank=True)
     description = RichTextField(null=True, blank=True)
@@ -38,7 +40,7 @@ class Movie(BaseModel):
     views = models.IntegerField(default=0, null=True, blank=True)
     duration = models.CharField(max_length=225, null=True, blank=True)
     release_date = models.DateField(null=True, blank=True)
-    trailer = models.URLField(null=True, blank=True)
+    trailer = models.URLField(unique=True, null=True, blank=True)
 
     def __str__(self):
         return self.name
