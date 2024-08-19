@@ -35,7 +35,7 @@ class CustomManager(UserManager):
 class User(AbstractUser):
     phone_number = models.CharField(max_length=225, null=True, blank=True, db_index=True, unique=True)
     avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)
-    email = models.EmailField(unique=True, db_index=True, max_length=50, null=True, blank=True)
+    email = models.EmailField(unique=True, db_index=True, max_length=225, null=True, blank=True)
     is_author = models.BooleanField(default=False, null=True, blank=True)
     is_verified = models.BooleanField(default=False, null=True, blank=True)
 
@@ -61,8 +61,8 @@ class User(AbstractUser):
 
 
 class VerifyEmail(models.Model):
-    email = models.EmailField(unique=True, db_index=True, max_length=50, null=True, blank=True)
-    code = models.CharField(max_length=6, verbose_name="Verify code", null=True, blank=True)
+    email = models.EmailField(unique=True, db_index=True, max_length=225, null=True, blank=True)
+    code = models.CharField(max_length=225, verbose_name="Verify code", null=True, blank=True)
 
     class Meta:
         verbose_name = "Confirm Email"

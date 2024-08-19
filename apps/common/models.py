@@ -28,7 +28,7 @@ class Genre(BaseModel):
 
 
 class Award(BaseModel):
-    name = models.CharField(max_length=225, null=True, blank=True)
+    name = models.CharField(max_length=225, null=True, blank=True, unique=True)
     date = models.DateField(null=True, blank=True)
 
     def __str__(self):
@@ -50,10 +50,12 @@ class Category(BaseModel):
 
 
 class Actor(BaseModel):
+
     TYPES = (
         (0, "Actor"),
         (1, "Regisseur"),
     )
+
     name = models.CharField(max_length=225, null=True, blank=True)
     type = models.IntegerField(choices=TYPES, default=0, null=True, blank=True)
 
@@ -62,7 +64,7 @@ class Actor(BaseModel):
 
 
 class Country(BaseModel):
-    name = models.CharField(max_length=225, null=True, blank=True)
+    name = models.CharField(max_length=225, null=True, blank=True, unique=True)
 
     def __str__(self):
         return self.name

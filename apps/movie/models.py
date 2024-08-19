@@ -14,7 +14,7 @@ class Movie(BaseModel):
         (2, "English"),
     )
 
-    name = models.CharField(max_length=225, null=True, blank=True)
+    name = models.CharField(max_length=225, null=True, blank=True, unique=True)
     slug = models.SlugField(unique=True, max_length=225, db_index=True, null=True, blank=True)
     description = RichTextField(null=True, blank=True)
     genres = models.ManyToManyField('common.Genre', blank=True)
@@ -55,6 +55,7 @@ class MovieImage(BaseModel):
 
 
 class MovieFile(BaseModel):
+
     PROGRESSIVES = (
         (0, "240p"),
         (1, "360p"),
@@ -62,6 +63,7 @@ class MovieFile(BaseModel):
         (3, "720p"),
         (4, "1080p"),
     )
+
     progressive = models.IntegerField(choices=PROGRESSIVES, default=1, null=True, blank=True)
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE, null=True, blank=True, related_name='files')
     file = models.FileField(upload_to='files/', null=True, blank=True)
@@ -83,17 +85,19 @@ class Review(BaseModel):
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE, null=True, blank=True, related_name='reviews')
     user = models.ForeignKey('user.User', on_delete=models.SET_NULL, null=True, related_name='movie_reviews')
     rate = models.IntegerField(default=0, null=True, blank=True, validators=[MinValueValidator(0), MaxValueValidator(5)])
-    review = models.TextField(null=True, blank=True)
+    review = RichTextField(null=True, blank=True)
 
     def __str__(self):
         return f"{self.movie}, {self.user}, {self.rate}"
 
 
 class Liked(BaseModel):
+    
     LIKES = (
         (0, "Like"),
         (1, "Dislike"),
     )
+
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE, null=True, blank=True, related_name='likes')
     user = models.ForeignKey('user.User', on_delete=models.SET_NULL, null=True, related_name='liked_movies')
     like = models.IntegerField(choices=LIKES, default=0, null=True, blank=True)
