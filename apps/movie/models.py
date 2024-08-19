@@ -1,5 +1,8 @@
 from django.db import models
 
+import uuid
+from django.template.defaultfilters import slugify
+
 from ckeditor.fields import RichTextField
 from django.core.validators import MinValueValidator, MaxValueValidator
 
@@ -44,6 +47,12 @@ class Movie(BaseModel):
 
     def __str__(self):
         return self.name
+    
+    def save(self, *args, **kwargs):  
+        if not self.slug:
+            self.slug = f"{slugify(self.name)}-{uuid.uuid4()}"
+
+        return super().save(*args, **kwargs)
 
 
 class MovieImage(BaseModel):

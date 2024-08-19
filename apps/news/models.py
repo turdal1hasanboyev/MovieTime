@@ -1,11 +1,16 @@
 from django.db import models
 
-from apps.common.models import BaseModel
+import uuid
+from django.template.defaultfilters import slugify
+
 from ckeditor.fields import RichTextField
+
+from apps.common.models import BaseModel
 
 
 class MovieNews(BaseModel):
     name = models.CharField(max_length=225, null=True, blank=True)
+    slug = models.SlugField(unique=True, null=True, blank=True, db_index=True, max_length=225)
     description = RichTextField(null=True, blank=True)
     image = models.ImageField(upload_to='movie_news', null=True, blank=True)
     premiere_date = models.DateField(null=True, blank=True)
@@ -36,3 +41,9 @@ class MovieNews(BaseModel):
 
     def __str__(self):
         return self.name
+    
+    def save(self, *args, **kwargs):  
+        if not self.slug:
+            self.slug = f"{slugify(self.name)}-{uuid.uuid4()}"
+
+        return super().save(*args, **kwargs)
