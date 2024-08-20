@@ -46,7 +46,7 @@ class Movie(BaseModel):
     trailer = models.URLField(unique=True, null=True, blank=True)
 
     def __str__(self):
-        return self.name
+        return f"{self.name}"
     
     def save(self, *args, **kwargs):  
         if not self.slug:
@@ -61,8 +61,8 @@ class MovieImage(BaseModel):
 
     def __str__(self):
         return self.movie.name
-
-
+    
+    
 class MovieFile(BaseModel):
 
     PROGRESSIVES = (
@@ -74,11 +74,18 @@ class MovieFile(BaseModel):
     )
 
     progressive = models.IntegerField(choices=PROGRESSIVES, default=1, null=True, blank=True)
-    movie = models.ForeignKey(Movie, on_delete=models.CASCADE, null=True, blank=True, related_name='files')
+    movie_id = models.BigIntegerField(db_index=True, null=True, blank=True, verbose_name='Movie ID')
     file = models.FileField(upload_to='files/', null=True, blank=True)
 
     def __str__(self):
-        return f"{self.movie.name}, {self.progressive}"
+        return f"{self.movie_id}, {self.progressive}"
+    
+    class Meta:
+        app_label = 'movie'
+
+    @property
+    def movie(self):
+        return Movie.objects.filter(id=self.movie_id).first()
 
 
 class AdditionalInfo(BaseModel):

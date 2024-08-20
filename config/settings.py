@@ -60,11 +60,10 @@ INSTALLED_APPS = [
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
     ),
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    'PAGE_SIZE': 2,
+    'PAGE_SIZE': 3,
 }
 
 MIDDLEWARE = [
@@ -119,7 +118,21 @@ DATABASES = {
         'PASSWORD': 'movie_time',
         'HOST': 'localhost',
         'PORT': '5432',
-    }
+    },
+    'movies': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'movies',
+        'USER': 'movies',
+        'PASSWORD': 'movies',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    },
+}
+
+DATABASE_ROUTERS = ['config.routers.DatabaseRouter']
+
+DATABASE_APPS_MAPPING = {
+    "movie": "movies",
 }
 
 # Password validation

@@ -8,6 +8,13 @@ from ckeditor.fields import RichTextField
 from apps.common.models import BaseModel
 
 
+class Tag(BaseModel):
+    name = models.CharField(max_length=225, null=True, blank=True)
+
+    def __str__(self):
+        return self.name
+
+
 class MovieNews(BaseModel):
     name = models.CharField(max_length=225, null=True, blank=True)
     slug = models.SlugField(unique=True, null=True, blank=True, db_index=True, max_length=225)
@@ -38,6 +45,7 @@ class MovieNews(BaseModel):
         limit_choices_to={"type": 0},
         related_name="newsactors",
         )
+    tags = models.ManyToManyField("Tag", blank=True)
 
     def __str__(self):
         return self.name

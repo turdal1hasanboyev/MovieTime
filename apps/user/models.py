@@ -68,6 +68,6 @@ class VerifyEmail(models.Model):
         verbose_name = "Confirm Email"
         verbose_name_plural = "Confirm Emails"
 
-    def __str__(self) -> str:
+    def __str__(self):
         return f"{self.email}"
     
