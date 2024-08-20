@@ -6,6 +6,21 @@ from .api.genre.GenreDetail.views import GenreRetrieveView
 from .api.genre.GenreList.views import GenreListView
 from .api.genre.GenreUpdate.views import GenreUpdateView
 
+from .api.category.CategoryCreate.views import CategoryCreateView
+from .api.category.CategoryDestroy.views import CategoryDestroyView
+from .api.category.CategoryDetail.views import CategoryRetrieveView
+from .api.category.CategoryList.views import CategoryListView
+from .api.category.CategoryUpdate.views import CategoryUpdateView
+
+from .api.award.AwardLC.views import AwardLCView
+from .api.award.AwardRUD.views import AwardRUDView
+
+from .api.actor.ActorLC.views import ActorLCView
+from .api.actor.ActorRUD.views import ActorRUDView
+
+from .api.country.CountryLC.views import CountryLCView
+from .api.country.CountryRUD.views import CountryRUDView
+
 
 app_name = "common"
 
@@ -15,4 +30,19 @@ urlpatterns = [
     path('genredetail/<str:name>/', GenreRetrieveView.as_view(), name='genre_detail'),
     path('genrelist/', GenreListView.as_view(), name='genre_list'),
     path('genreupdate/<str:name>/', GenreUpdateView.as_view(), name='genre_update'),
+
+    path('categorycreate/', CategoryCreateView.as_view(), name="category_create"),
+    path('categorylist/', CategoryListView.as_view(), name="category_list"),
+    path('categoryupdate/<str:name>/', CategoryUpdateView.as_view(), name="category_edit"),
+    path('categorydetail/<str:name>/', CategoryRetrieveView.as_view(), name="category_detail"),
+    path('categorydelete/<str:name>/', CategoryDestroyView.as_view(), name="category_delete"),
+
+    path('awardlc/', AwardLCView.as_view(), name='award_lc'),
+    path('awardrud/<str:name>/', AwardRUDView.as_view(), name='award_rud'),
+
+    path('actorlc/', ActorLCView.as_view(), name='actor_lc'),
+    path('actorrud/<str:name>/', ActorRUDView.as_view(), name='actor_rud'),
+
+    path('countrylc/', CountryLCView.as_view(), name='country_lc'),
+    path('countryrud/<str:name>/', CountryRUDView.as_view(), name='actor_rud'),
 ]
