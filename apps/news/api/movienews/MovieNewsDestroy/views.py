@@ -5,10 +5,13 @@ from .serializer import MovieNewsDestroySerializer
 
 
 class MovieNewsDestroyView(DestroyAPIView):
-    queryset = MovieNews.objects.filter(is_active=True)
+    queryset = MovieNews.objects.all()
     serializer_class = MovieNewsDestroySerializer
     lookup_field = "slug"
 
+    def get_queryset(self):
+        return MovieNews.objects.filter(is_active=True).select_related("category", "country").prefetch_related("tags", "actor", "regisseurs", "ganres")
+    
     def perform_destroy(self, instance):
         instance.is_active = False
         

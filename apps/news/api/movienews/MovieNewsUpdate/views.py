@@ -10,5 +10,5 @@ class MovieNewsUpdateView(UpdateAPIView):
     lookup_field = 'slug'
     
     def get_queryset(self):
-        return MovieNews.objects.filter(is_active=True)
+        return MovieNews.objects.filter(is_active=True).select_related("category", "country").prefetch_related("tags", "actor", "regisseurs", "ganres")
     
