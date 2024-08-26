@@ -18,8 +18,7 @@ from .api.award.AwardRUD.views import AwardRUDView
 from .api.actor.ActorLC.views import ActorLCView
 from .api.actor.ActorRUD.views import ActorRUDView
 
-from .api.country.CountryLC.views import CountryLCView
-from .api.country.CountryRUD.views import CountryRUDView
+from .api.country.CountryList.views import CountryListView
 
 
 app_name = "common"
@@ -43,6 +42,5 @@ urlpatterns = [
     path('actorlc/', ActorLCView.as_view(), name='actor_lc'),
     path('actorrud/<str:name>/', ActorRUDView.as_view(), name='actor_rud'),
 
-    path('countrylc/', CountryLCView.as_view(), name='country_lc'),
-    path('countryrud/<str:name>/', CountryRUDView.as_view(), name='actor_rud'),
+    path('countrylist/', CountryListView.as_view(), name='country_list'),
 ]

@@ -3,7 +3,7 @@ from rest_framework.serializers import ModelSerializer
 from apps.common.models import Country
 
 
-class CountryLCSerializer(ModelSerializer):
+class CountryListSerializer(ModelSerializer):
     class Meta:
         model = Country
         fields = (
@@ -11,9 +11,4 @@ class CountryLCSerializer(ModelSerializer):
             "name",
             "created_at",
         )
-
-        extra_kwargs = {
-            "uuid": {"read_only": True},
-            "created_at": {"read_only": True},
-        }
         

@@ -49,7 +49,10 @@ class User(AbstractUser):
         if self.get_full_name():
             return f"{self.id} - {self.get_full_name()}"
         
-        return self.email
+        elif self.email:
+            return f"{self.id} - {self.email}"
+        
+        return f"{self.id} - {self.username}"
 
     def get_tokens(self):
         refresh = RefreshToken.for_user(self)
@@ -69,5 +72,5 @@ class VerifyEmail(models.Model):
         verbose_name_plural = "Confirm Emails"
 
     def __str__(self):
-        return f"{self.email}"
+        return f"{self.id} - {self.email}"
     

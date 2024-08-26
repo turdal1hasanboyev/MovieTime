@@ -26,7 +26,7 @@ class Movie(BaseModel):
     regisseurs = models.ManyToManyField('common.Actor', blank=True, limit_choices_to={"type": 1}, related_name='regisseurs')
     category = models.ForeignKey(
         'common.Category',
-        on_delete=models.SET_NULL,
+        on_delete=models.CASCADE,
         related_name='movies',
         related_query_name='movie',
         null=True, blank=True,
