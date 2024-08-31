@@ -30,6 +30,9 @@ from .api.additionaiInfo.AdditionalInfoList.views import AdditionalInfoListView
 from .api.additionaiInfo.AdditionalInfoDetail.views import AdditionalInfoDetailView
 from .api.additionaiInfo.AdditionalInfoUpdate.views import AdditionalInfoUpdateView
 
+from .api.moviefile.MovieFileLC.views import MovieFileLCView
+from .api.moviefile.MovieFileRUD.views import MovieFileRUDView
+
 app_name = "movie"
 
 urlpatterns = [
@@ -62,4 +65,7 @@ urlpatterns = [
     path("additionalinfolist/", AdditionalInfoListView.as_view(), name='additional_info_list'),
     path("additionalinfodetail/<str:movie>/", AdditionalInfoDetailView.as_view(), name="additional_info_detail"),
     path("additionalinfoupdate/<str:movie>/", AdditionalInfoUpdateView.as_view(), name="additional_info_update"),
+
+    path("moviefilelc/", MovieFileLCView.as_view(), name="moviefilelc"),
+    path("moviefilerud/<str:movie>/", MovieFileRUDView.as_view(), name="moviefilelc"),
 ]

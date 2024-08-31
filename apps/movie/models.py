@@ -74,18 +74,19 @@ class MovieFile(BaseModel):
     )
 
     progressive = models.IntegerField(choices=PROGRESSIVES, default=1, null=True, blank=True)
-    movie_id = models.BigIntegerField(db_index=True, null=True, blank=True, verbose_name='Movie ID')
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE, null=True, blank=True, related_name='movie_file')
+    # movie_id = models.BigIntegerField(db_index=True, null=True, blank=True, verbose_name='Movie ID')
     file = models.FileField(upload_to='files/', null=True, blank=True)
 
     def __str__(self):
-        return f"{self.movie_id}, {self.progressive}"
+        return f"{self.movie}, {self.progressive}"
     
-    class Meta:
-        app_label = 'movie'
+    # class Meta:
+    #     app_label = 'movie'
 
-    @property
-    def movie(self):
-        return Movie.objects.filter(id=self.movie_id).first()
+    # @property
+    # def movie(self):
+    #     return Movie.objects.filter(id=self.movie_id).first()
 
 
 class AdditionalInfo(BaseModel):

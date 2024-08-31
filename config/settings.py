@@ -114,26 +114,26 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'movie_time',
-        'USER': 'movie_time',
-        'PASSWORD': 'movie_time',
+        'USER': 'postgres',
+        'PASSWORD': '1111',
         'HOST': 'localhost',
         'PORT': '5432',
     },
-    'movies': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'movies',
-        'USER': 'movies',
-        'PASSWORD': 'movies',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    },
+    # 'movies': {
+    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    #     'NAME': 'movies',
+    #     'USER': 'postgres',
+    #     'PASSWORD': '1111',
+    #     'HOST': 'localhost',
+    #     'PORT': '5432',
+    # },
 }
 
-DATABASE_ROUTERS = ['config.routers.DatabaseRouter']
+# DATABASE_ROUTERS = ['config.routers.DatabaseRouter']
 
-DATABASE_APPS_MAPPING = {
-    "movie": "movies",
-}
+# DATABASE_APPS_MAPPING = {
+#     "movie": "movies",
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
